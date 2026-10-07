@@ -19,13 +19,13 @@
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--ch:#121212;--ch2:#1b1b1b;--y:#FFD60A;--g:#B8975A;--w:#fff;--mut:#a8a8a8;--line:#ffffff1f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*,*:before,*:after{box-sizing:inherit}html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+:root{--bg:#000;--ch:#121212;--ch2:#1b1b1b;--y:#FFD60A;--g:#B8975A;--w:#fff;--mut:#a8a8a8;--line:#ffffff1f;--nav-height:calc(72px + env(safe-area-inset-top,0px));box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*:before,*:after{box-sizing:inherit}html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-height,96px) + 12px)}
 body{margin:0;background:#000;color:var(--w);font:16px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
 h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.05;margin:0 0 .5em}
 h1{font-size:clamp(2.4rem,7vw,5.5rem);font-weight:800}h2{font-size:clamp(1.9rem,4.5vw,3.4rem);font-weight:800}h3{font-size:1.15rem}
 a{color:inherit}button{font:inherit;cursor:pointer}:focus-visible{outline:2px solid var(--y);outline-offset:3px}
-section{padding:88px 20px;position:relative}.wrap{max-width:1180px;margin:0 auto}
+section{padding:88px 20px;position:relative}.page>section:first-child{padding-top:calc(var(--nav-height,96px) + 24px)}.wrap{max-width:1180px;margin:0 auto}
 .lead{color:var(--mut);max-width:60ch}.y{color:var(--y)}
 .btn{display:inline-block;border:1px solid var(--y);background:var(--y);color:#000;padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;transition:.2s}
 .btn:hover{box-shadow:0 0 28px #FFD60A55;transform:translateY(-2px)}.btn.o{background:transparent;color:var(--y)}
@@ -37,11 +37,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(14px + env(safe-
 nav.s{padding-top:calc(6px + env(safe-area-inset-top,0px));padding-bottom:6px}
 nav .in{display:flex;align-items:center;gap:18px;max-width:1280px;margin:0 auto}
 .logo{font-family:'Bricolage Grotesque';font-weight:800;text-decoration:none;white-space:nowrap}.logo b{color:var(--y)}
-.menu{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px 14px;font-size:.72rem;margin-left:auto;align-items:center;max-width:1000px}.menu a{text-decoration:none;color:var(--mut)}.menu a:hover{color:var(--y)}
+.menu{display:flex;flex-wrap:nowrap;justify-content:flex-end;gap:10px 8px;font-size:.72rem;margin-left:auto;align-items:center}.menu a{text-decoration:none;color:var(--mut);white-space:nowrap}.menu a:hover{color:var(--y)}
 .ham{display:none;margin-left:auto;background:none;border:0;width:40px;height:40px;position:relative}
 .ham i{position:absolute;left:8px;right:8px;height:2px;background:#fff;transition:.3s}.ham i:nth-child(1){top:13px}.ham i:nth-child(2){top:19px}.ham i:nth-child(3){top:25px}
 .ham.o i:nth-child(1){top:19px;transform:rotate(45deg)}.ham.o i:nth-child(2){opacity:0}.ham.o i:nth-child(3){top:19px;transform:rotate(-45deg)}
-@media(max-width:1100px){.ham{display:block}.menu{position:fixed;inset:60px 0 auto 0;flex-direction:column;background:#000;padding:20px;display:none;font-size:1rem;align-items:flex-start;border-bottom:1px solid var(--line);max-height:80vh;overflow:auto}.menu.o{display:flex}}
+@media(max-width:1320px){.ham{display:block}.menu{position:fixed;inset:var(--nav-height,72px) 0 auto 0;flex-direction:column;background:#000;padding:20px;display:none;font-size:1rem;align-items:flex-start;border-bottom:1px solid var(--line);max-height:80vh;overflow:auto}.menu.o{display:flex}}
 .hero{min-height:100vh;display:flex;align-items:center;overflow:hidden}
 #bg{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
 .hero .wrap{position:relative;display:grid;gap:30px;grid-template-columns:1.4fr 1fr;align-items:center}
@@ -97,7 +97,8 @@ body.recede main{transform:scale(.5);opacity:.4;filter:blur(1.5px)}body.recede n
 .chip{padding:12px 16px}
 .menu{font-size:.8rem}
 .menu a.on{color:var(--y)}
-@media(max-width:1100px){.menu a{padding:12px 0;width:100%}}
+@media(max-width:1320px){.menu a{padding:12px 0;width:100%}}
+@media(min-width:1321px){.menu{font-size:.7rem}}
 #skip{padding:12px 20px}
 </style></head><body>
 <a class="skip" href="#learn">Skip to content</a>
@@ -197,7 +198,14 @@ $('#an').onclick=()=>{const r=$('#rt').value.toLowerCase(),j=$('#jt').value.toLo
 const stop=new Set('the and for with that this you your are will our from have has not but can all any who they their about into more other such than also able work team role years'.split(' '));const w=t=>[...new Set((t.match(/[a-z][a-z+#.]{2,}/g)||[]).filter(x=>!stop.has(x)))];const jw=w(j),rs=new Set(w(r));const hit=jw.filter(x=>rs.has(x)),miss=jw.filter(x=>!rs.has(x));const km=Math.round(hit.length/Math.max(jw.length,1)*100);const ats=Math.min(100,Math.round(km*.7+(/experience/.test(r)?10:0)+(/skills/.test(r)?10:0)+(/education/.test(r)?10:0)));
 o.innerHTML=`<div class="card"><div class="score">${km}%</div>Keyword match</div><div class="card"><div class="score">${ats}</div>ATS score (estimate)</div><div class="card"><div class="score">${Math.round((km+ats)/2)}</div>Resume score</div><div class="card"><h3>Missing keywords</h3>${miss.slice(0,15).map(m=>`<span class="tag">${esc(m)}</span>`).join('')||'None'}</div><div class="card"><h3>Matched skills</h3>${hit.slice(0,15).map(m=>`<span class="tag">${esc(m)}</span>`).join('')||'None'}</div><div class="card"><h3>Suggestions</h3><p class="small">Add missing terms only where they are true. Add a Skills heading, measurable results, and mirror the job title in your headline.</p></div>`};
 /* nav */
-const nav=$('#nav'),ham=$('#ham'),menu=$('#menu');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
+const nav=$('#nav'),ham=$('#ham'),menu=$('#menu');
+function measureNav(){
+  const compact=nav.classList.contains('s');
+  // The compact header removes 8px from each vertical padding; keep the full height reserved.
+  document.documentElement.style.setProperty('--nav-height',`${Math.ceil(nav.offsetHeight+(compact?16:0))}px`);
+}
+measureNav();addEventListener('resize',measureNav,{passive:true});addEventListener('orientationchange',measureNav,{passive:true});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measureNav);
+addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
 ham.onclick=()=>{const o=menu.classList.toggle('o');ham.classList.toggle('o',o);ham.setAttribute('aria-expanded',o)};menu.onclick=e=>{if(e.target.tagName=='A'){menu.classList.remove('o');ham.classList.remove('o')}};
 /* particles */
 function parts(cv,n){const x=cv.getContext('2d');let w,h,p=[];const rs=()=>{w=cv.width=cv.offsetWidth;h=cv.height=cv.offsetHeight;p=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))};rs();addEventListener('resize',rs);let live=true;(function f(){if(!live||!cv.isConnected)return;x.clearRect(0,0,w,h);x.fillStyle='#FFD60A';p.forEach((a,i)=>{a.x=(a.x+a.vx+w)%w;a.y=(a.y+a.vy+h)%h;x.globalAlpha=.7;x.fillRect(a.x,a.y,2,2);for(let k=i+1;k<p.length;k++){const b=p[k],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<110){x.globalAlpha=.12*(1-d/110);x.strokeStyle='#B8975A';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}});if(!rm)requestAnimationFrame(f)})();return()=>live=false}
